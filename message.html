@@ -1,0 +1,52 @@
+<html>
+  <script>
+    const copyToClipboard = (element) => {
+      const { document: doc } = window;
+      const text = doc.getElementById(element);
+      const selection = window.getSelection();
+      const range = doc.createRange();
+
+      // Clear possible other selections on the page
+      selection.removeAllRanges();
+
+      // Copy text from selected element
+      range.selectNodeContents(text);
+      selection.addRange(range);
+
+      // Copy to clipboard
+      doc.execCommand("copy");
+
+      // Clear selection
+      window.getSelection().removeAllRanges();
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    p {
+      font-size: 2em;
+      margin: 200px;
+    }
+    input {
+      padding: 5px 10px;
+      margin-left: 10px;
+      border: 1px solid #333;
+      border-radius: 7px;
+    }
+  </style>
+
+  <body>
+    <p>
+      <span id="slackMessage"
+        >Mun teksti <a href="https://google.com">linkillä</a>! :partyblob:</span
+      >
+      <input
+        onclick="copyToClipboard('slackMessage')"
+        type="button"
+        value="Copy"
+      />
+    </p>
+  </body>
+</html>
